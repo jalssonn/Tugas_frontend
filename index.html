@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Vibes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --beige: #F5F5DC;
+            --brown: #8B4513;
+            --burlywood: #DEB887;
+            --white: #ffffff;
+        }
+
+        [data-bs-theme="light"] {
+            --body-bg: var(--white);
+            --nav-bg: var(--beige);
+            --hero-bg: var(--burlywood);
+            --text-color: var(--brown);
+            --card-bg: white;
+        }
+
+        [data-bs-theme="dark"] {
+            --body-bg: #1a1a1a;
+            --nav-bg: #2d1810;
+            --hero-bg: #3d2b1f;
+            --text-color: var(--beige);
+            --card-bg: #2d2d2d;
+        }
+        /* Tambahkan di dalam style yang sudah ada */
+[data-bs-theme="dark"] .carousel-caption h1,
+[data-bs-theme="dark"] .carousel-caption p {
+    color: var(--white);
+}
+
+[data-bs-theme="dark"] .carousel-caption .btn-primary {
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--brown);
+}
+
+[data-bs-theme="dark"] .carousel-caption .btn-primary:hover {
+    background-color: var(--beige);
+    border-color: var(--beige);
+}
+        
+        body {
+            background-color: var(--body-bg);
+            transition: all 0.3s ease;
+            padding-top: 76px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background-color: var(--nav-bg) !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: var(--brown) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border-color: transparent;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--brown) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--burlywood) !important;
+            border-bottom: 2px solid var(--burlywood);
+        }
+
+        .theme-switch {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--brown);
+            color: var(--brown);
+            transition: all 0.3s ease;
+        }
+
+        .theme-switch:hover {
+            background-color: var(--brown);
+            color: var(--beige);
+        }
+
+        .nav-subscribe {
+            transition: all 0.3s ease;
+        }
+
+        .nav-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background-color: var(--nav-bg);
+                padding: 1rem;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .navbar-nav .nav-link {
+                border-bottom: none;
+            }
+
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link.active {
+                background-color: var(--burlywood);
+                color: var(--white) !important;
+                border-radius: 5px;
+            }
+
+            .theme-switch,
+            .nav-subscribe {
+                margin-top: 0.5rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .d-flex.align-items-center {
+                flex-direction: column;
+            }
+        }
+        
+        .btn-primary {
+            background-color: var(--burlywood);
+            border-color: var(--burlywood);
+            color: var(--brown);
+        }
+        
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active {
+            background-color: var(--brown) !important;
+            border-color: var(--brown) !important;
+            color: var(--beige) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--brown);
+            border-color: var(--brown);
+            color: var(--beige);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--burlywood);
+            border-color: var(--brown);
+            color: var(--brown);
+        }
+
+        .hero-section {
+            margin-top: -76px;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .carousel-fade .carousel-item {
+            opacity: 0;
+            transition-duration: .6s;
+            transition-property: opacity;
+        }
+        
+        .carousel-fade .carousel-item.active,
+        .carousel-fade .carousel-item-next.carousel-item-start,
+        .carousel-fade .carousel-item-prev.carousel-item-end {
+            opacity: 1;
+        }
+        
+        .carousel-fade .active.carousel-item-start,
+        .carousel-fade .active.carousel-item-end {
+            opacity: 0;
+        }
+        
+        .carousel-fade .carousel-item-next,
+        .carousel-fade .carousel-item-prev,
+        .carousel-fade .carousel-item.active,
+        .carousel-fade .active.carousel-item-start,
+        .carousel-fade .active.carousel-item-prev {
+            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        /* Hide carousel controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            display: none;
+        }
+
+        /* Hide carousel indicators */
+        .carousel-indicators {
+            display: none;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            z-index: 10; /* Tambahkan ini untuk memastikan caption di atas gambar */
+        }
+        
+        .card {
+            border: none;
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+        }
+
+        .wellness-card,
+        .fashion-card {
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .wellness-card::before,
+        .fashion-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card .text-theme,
+        .card .card-text {
+            color: var(--white) !important;
+        }
+        
+        .newsletter-section {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+.newsletter-content {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.newsletter-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-form .form-control {
+    border: none;
+    border-bottom: 2px solid var(--burlywood);
+    border-radius: 0;
+    background-color: transparent;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--brown);
+}
+
+.newsletter-form .btn-primary {
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+[data-bs-theme="dark"] .newsletter-content {
+    background-color: rgba(45, 45, 45, 0.9) !important;
+}
+
+[data-bs-theme="dark"] .newsletter-form .form-control {
+    color: var(--beige);
+    border-bottom-color: var(--burlywood);
+}
+
+[data-bs-theme="dark"] .newsletter-content h2,
+[data-bs-theme="dark"] .newsletter-content p {
+    color: var(--beige);
+}
+        
+        .text-theme {
+            color: var(--text-color) !important;
+        }
+
+        .theme-switch {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--brown);
+            color: var(--brown);
+            margin: 0 15px;
+            display: inline-block;
+        }
+
+        [data-bs-theme="dark"] .dark-mode-icon {
+            display: none;
+        }
+
+        [data-bs-theme="light"] .light-mode-icon {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-caption {
+                padding: 1rem;
+                width: 95%;
+            }
+
+            .carousel-caption h1 {
+                font-size: 1.75rem;
+            }
+
+            .carousel-caption .lead {
+                font-size: 1rem;
+            }
+
+            .newsletter-section form .col-md-4,
+            .newsletter-section form .col-md-2 {
+                padding: 0 15px;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Tambahkan style baru untuk konten utama */
+        main {
+            flex-grow: 1;
+        }
+
+        /* Ubah style untuk carousel-item */
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            height: 100vh; /* Ubah ini jika perlu */
+            width: 100%;
+        }
+
+        .lifestyle-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: var(--card-bg);
+        }
+
+        .lifestyle-card img {
+            width: 100%;
+            height: 200px; /* Sesuaikan tinggi sesuai kebutuhan */
+            object-fit: cover;
+        }
+
+        .lifestyle-card .card-body {
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+        }
+
+        .lifestyle-card .card-title {
+            color: var(--brown);
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lifestyle-card .card-text {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .lifestyle-card .btn-outline-primary {
+            border-color: var(--burlywood);
+            color: var(--brown);
+            transition: all 0.3s ease;
+        }
+
+        .lifestyle-card .btn-outline-primary:hover {
+            background-color: var(--burlywood);
+            color: var(--white);
+        }
+
+        /* Mode terang */
+        [data-bs-theme="light"] .lifestyle-card .card-title,
+        [data-bs-theme="light"] .lifestyle-card .card-text {
+            color: #000000 !important; /* Hitam */
+        }
+
+        [data-bs-theme="light"] .lifestyle-card .btn-outline-primary {
+            border-color: var(--burlywood);
+            color: var(--brown);
+        }
+
+        /* Mode gelap */
+        [data-bs-theme="dark"] .lifestyle-card .card-title {
+            color: var(--burlywood);
+        }
+
+        [data-bs-theme="dark"] .lifestyle-card .card-text {
+            color: var(--beige);
+        }
+
+        [data-bs-theme="dark"] .lifestyle-card .btn-outline-primary {
+            border-color: var(--burlywood);
+            color: var(--burlywood);
+        }
+
+
+
+        /* Styling untuk footer */
+        footer {
+            background-color: var(--nav-bg);
+            color: var(--text-color);
+            padding-top: 3rem;
+            padding-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--burlywood), var(--brown), var(--burlywood));
+        }
+
+        footer h5 {
+            color: var(--brown);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--burlywood);
+        }
+
+        footer p, footer ul li {
+            color: var(--text-color);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        footer ul {
+            padding-left: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--burlywood);
+            padding-left: 5px;
+        }
+
+        footer i {
+            color: var(--burlywood);
+            margin-right: 0.5rem;
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            bottom: auto;
+            text-align: center;
+        }
+
+        .carousel-caption h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-caption p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .carousel-caption .btn-primary {
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--burlywood);
+        }
+
+        .carousel-caption .btn-primary:hover {
+            background-color: transparent;
+            color: var(--burlywood);
+            transform: translateY(-3px);
+        }
+
+        /* Mode gelap */
+        [data-bs-theme="dark"] footer {
+            background-color: #1a1a1a;
+        }
+
+        [data-bs-theme="dark"] footer h5 {
+            color: var(--burlywood);
+        }
+
+        [data-bs-theme="dark"] footer p,
+        [data-bs-theme="dark"] footer ul li,
+        [data-bs-theme="dark"] footer a {
+            color: var(--beige);
+        }
+
+        [data-bs-theme="dark"] footer a:hover {
+            color: var(--burlywood);
+        }
+
+        [data-bs-theme="dark"] footer .text-muted {
+            color: var(--beige) !important;
+        }
+
+        [data-bs-theme="dark"] footer .bg-light {
+            background-color: #1a1a1a !important;
+        }
+
+        .about-section {
+            background-color: var(--body-bg);
+        }
+
+        .about-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--burlywood);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .icon-wrapper i {
+            font-size: 2rem;
+            color: var(--brown);
+        }
+
+        [data-bs-theme="dark"] .about-card {
+            background-color: #2d2d2d;
+        }
+
+        [data-bs-theme="dark"] .icon-wrapper {
+            background-color: var(--brown);
+        }
+
+        [data-bs-theme="dark"] .icon-wrapper i {
+            color: var(--burlywood);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar tetap di luar main -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf me-2"></i>Lifestyle Vibes
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#heroCarousel"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="theme-switch me-3" id="themeSwitch">
+                        <i class="fas fa-moon dark-mode-icon"></i>
+                        <i class="fas fa-sun light-mode-icon"></i>
+                    </div>
+                    <button class="btn btn-primary nav-subscribe">
+                        <i class="fas fa-paper-plane me-1"></i>Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bungkus konten utama dengan tag main -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1614928228253-dc09cbc3b11c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100 h-100" alt="Lifestyle Hub">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/flagged/photo-1553802922-2eb2f7f2c65b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100 h-100" alt="Wellness">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1467453678174-768ec283a940?q=80&w=2044&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100 h-100" alt="Style & Fashion">
+                    </div>
+                </div>
+                <!-- Caption di luar carousel-inner -->
+                <div class="carousel-caption">
+                    <h1 class="display-4 fw-bold mb-4">Welcome to the Lifestyle Vibes</h1>
+                    <p class="lead mb-4">Ignite your passion, embrace change, and craft your ideal lifestyle</p>
+                    <a href="#lifestyle" class="btn btn-primary btn-lg">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards Section -->
+        <section id="lifestyle" class="py-5" style="padding-top: 100px !important">
+            <div class="container">
+                <h2 class="text-center mb-5 fw-bold">Explore Our Lifestyle Categories</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 lifestyle-card">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3" class="card-img-top" alt="Wellness">
+                            <div class="card-body p-4">
+                                <h3 class="card-title text-theme fw-bold mb-3">Wellness & Health</h3>
+                                <p class="card-text mb-4">Temukan pendekatan holistik terhadap kesehatan, mulai dari tips nutrisi hingga praktik mindfulness..</p>
+                                <a href="#" class="btn btn-outline-primary">Explore Wellness</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 lifestyle-card">
+                            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3" class="card-img-top" alt="Fashion">
+                            <div class="card-body p-4">
+                                <h3 class="card-title text-theme fw-bold mb-3">Fashion & Style</h3>
+                                <p class="card-text mb-4">Temukan tips dan saran gaya terkini untuk memperkaya gaya hidup Anda.</p>
+                                <a href="#" class="btn btn-outline-primary">Discover Fashion</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 lifestyle-card">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3" class="card-img-top" alt="Food">
+                            <div class="card-body p-4">
+                                <h3 class="card-title text-theme fw-bold mb-3">Culinary Adventures</h3>
+                                <p class="card-text mb-4">Jelajahi resep-resep lezat dan sehat untuk petualangan rasa baru.</p>
+                                <a href="#" class="btn btn-outline-primary">Taste More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section py-5" style="padding-top: 100px !important">
+            <div class="container">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-theme fw-bold mb-4">About Lifestyle Vibes</h2>
+                        <p class="lead">Kami adalah komunitas yang berdedikasi untuk membantu Anda menjalani kehidupan yang lebih seimbang, sehat, dan penuh gaya. Bersama-sama, kita akan menjelajahi dan merayakan setiap aspek gaya hidup modern.</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="about-card text-center">
+                            <div class="icon-wrapper mb-3">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Lifestyle Inspiration</h4>
+                            <p>Temukan ide-ide segar untuk memperkaya keseharian Anda dan hidup lebih bermakna.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="about-card text-center">
+                            <div class="icon-wrapper mb-3">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Holistic Health</h4>
+                            <p>Pelajari pendekatan menyeluruh untuk kesehatan fisik dan mental Anda.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="about-card text-center">
+                            <div class="icon-wrapper mb-3">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Fashion Trends</h4>
+                            <p>Tetap up-to-date dengan gaya terkini yang mencerminkan kepribadian unik Anda.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="about-card text-center">
+                            <div class="icon-wrapper mb-3">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Creative Culinary</h4>
+                            <p>Jelajahi resep-resep lezat dan sehat untuk petualangan rasa baru.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <a href="#" class="btn btn-primary btn-lg">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="newsletter-content text-center bg-light p-5 rounded-lg shadow">
+                            <h2 class="text-theme fw-bold mb-4">Bergabunglah dengan Komunitas Kami</h2>
+                            <p class="text-muted mb-4">Dapatkan update terbaru tentang gaya hidup, kesehatan, dan tren terkini langsung di kotak masuk Anda.</p>
+                            <form class="newsletter-form">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Nama Anda" aria-label="Nama Anda">
+                                    <input type="email" class="form-control" placeholder="Alamat Email" aria-label="Alamat Email">
+                                    <button class="btn btn-primary" type="submit">Berlangganan</button>
+                                </div>
+                            </form>
+                            <p class="small text-muted mt-3">Dengan berlangganan, Anda menyetujui <a href="#">Kebijakan Privasi</a> kami.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4"><i class="fas fa-leaf me-2"></i>Lifestyle Vibes</h5>
+                    <p>
+                        Menjelajahi tren gaya hidup terkini untuk kehidupan yang lebih baik dan seimbang.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="me-3 text-reset"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3 text-reset"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3 text-reset"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3 text-reset"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Tautan Cepat</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#heroCarousel">Home</a></li>
+                        <li class="mb-2"><a href="#about">About</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Hubungi Kami</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Apartemen Menara Latumenten, RT.1/RW.1, Jelambar Baru, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i>082151808386</li>
+                        <li><i class="fas fa-envelope me-2"></i>jalsson.535230145@stu.untar.ac.id</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3 mt-3">
+            © 2023 Lifestyle Vibes. Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+    <!-- Script tetap di luar main -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('themeSwitch').addEventListener('click', function() {
+            const html = document.documentElement;
+            if (html.getAttribute('data-bs-theme') === 'light') {
+                html.setAttribute('data-bs-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-bs-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
